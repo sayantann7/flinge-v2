@@ -1,0 +1,92 @@
+/* Profile Page Styles */
+.profile-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0;
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a2e;
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+}
+
+.profile-posts {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.profile-info {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  height: fit-content;
+}
+.profile-pic-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.edit-profile-pic {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--primary);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.edit-about {
+  background: var(--gray);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.edit-about:hover {
+  background: #e0e0e0;
+}

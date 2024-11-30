@@ -1,0 +1,409 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+:root {
+  --primary: #ff4b6e;
+  --dark: #1f1f1f;
+  --light: #ffffff;
+  --gray: #f5f5f5;
+  --text: #333333;
+}
+
+body {
+  background-color: var(--gray);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.navbar {
+  background-color: var(--light);
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.navbar a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -1px;
+}
+
+.nav-links a {
+  margin-left: 2rem;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 80px auto 0;
+  padding: 20px;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+}
+
+.post {
+  background: var(--light);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.post:hover {
+  transform: translateY(-2px);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-header img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  object-fit: cover;
+}
+
+.post-header h3 {
+  margin-bottom: 0.2rem;
+}
+
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray);
+}
+
+.post-actions button {
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.post-actions button:hover {
+  background-color: var(--gray);
+}
+
+.sidebar {
+  background: var(--light);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  height: fit-content;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--light);
+}
+
+.btn-secondary {
+  background-color: var(--gray);
+  color: var(--text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .nav-links a {
+    margin-left: 1rem;
+  }
+
+  .container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.8rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-links a {
+    margin-left: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .post {
+    padding: 1rem;
+  }
+}
+.like-count {
+  margin-left: 0.5rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-overlay.active {
+  display: flex;
+}
+
+.popup {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.popup h2 {
+  margin-bottom: 1.5rem;
+}
+
+.close-popup {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.post-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+:root {
+  --primary: #ff4b6e;
+  --dark: #1f1f1f;
+  --light: #ffffff;
+  --gray: #f5f5f5;
+  --text: #333333;
+}
+
+body {
+  background-color: var(--gray);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.navbar {
+  background-color: var(--light);
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.navbar a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -1px;
+}
+
+.nav-links a, .nav-links button {
+  margin-left: 2rem;
+  font-weight: 500;
+  color: var(--text);
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-links a:hover, .nav-links button:hover {
+  color: var(--primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 80px auto 0;
+  padding: 20px;
+}
+
+/* Rest of your existing styles */
+
+.like-count {
+  margin-left: 0.5rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-overlay.active {
+  display: flex;
+}
+
+.popup {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.popup h2 {
+  margin-bottom: 1.5rem;
+}
+
+.close-popup {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.post-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* New Recommendations Styles */
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.movie-recommendation {
+  background: var(--gray);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.movie-recommendation:hover {
+  transform: translateY(-4px);
+}
+
+.movie-recommendation img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 1rem;
+}
+
+.movie-info h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.recommendation-reason {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+}

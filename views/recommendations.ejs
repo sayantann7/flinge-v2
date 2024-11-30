@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flinge - recommendations</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/home" class="logo">flinge</a>
+      <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/recommendations">Recommendations</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="grid-layout">
+        <main>
+          <h1 style="padding: 10px">
+            Based on your user data... We think you might like these
+          </h1>
+          <% if (movies.length > 0) { %> <% movies.forEach(movie => { %>
+          <div class="post" style="width: 145%">
+            <div class="post-header">
+              <div>
+                <h3><%= movie.title %></h3>
+                <small><%= movie.director %></small>
+              </div>
+            </div>
+            <p><%= movie.description %></p>
+          </div>
+          <% }) %> <% } else { %>
+          <p>No movies recommended...</p>
+          <% } %>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

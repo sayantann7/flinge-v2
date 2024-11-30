@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flinge - Profile</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/profile.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/home" class="logo">flinge</a>
+      <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/recommendations">Recommendations</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="profile-header">
+        <div class="profile-pic-container">
+          <% if (user.profilePic) { %>
+          <img
+            src="/images/uploads/<%= user.profilePic %>"
+            alt="Profile Picture"
+            class="profile-pic"
+          />
+          <% } else { %>
+          <img
+            src="/images/default_profile_pic.jpg"
+            alt="Profile Picture"
+            class="profile-pic"
+          />
+          <% } %>
+          <button
+            class="edit-profile-pic"
+            onclick="document.getElementById('editProfilePicPopup').classList.add('active')"
+          >
+            ✏️
+          </button>
+        </div>
+        <h2><%= user.fullname %></h2>
+        <h4>@<%= user.username %></h4>
+        <% if (user.bio) { %>
+        <p><%= user.bio %></p>
+        <% } else { %>
+        <p>No bio added yet</p>
+        <% } %>
+        <button
+          class="edit-about"
+          onclick="document.getElementById('editBioPopup').classList.add('active')"
+        >
+          ✏️ Edit Bio
+        </button>
+        <div class="profile-stats">
+          <div class="stat-box">
+            <div class="stat-number"><%= user.userPosts.length %></div>
+            <div>Posts</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <div class="profile-posts">
+          <button
+            class="edit-about"
+            onclick="document.getElementById('createPostPopup').classList.add('active')"
+          >
+            ✏️ Create a Post
+          </button>
+          <h2>Recent Posts</h2>
+          <% if (user.userPosts.length > 0) { %>
+          <% user.userPosts.forEach(post => { %>
+          <div class="post">
+            <div class="post-header">
+              <% if (post.author.profilePic) { %>
+              <img
+                src="/images/uploads/<%= post.author.profilePic %>"
+                alt="User"
+              />
+              <% } else { %>
+              <img src="/images/default_profile_pic.jpg" alt="User" />
+              <% } %>
+              <div>
+                <h3><%= post.author.fullname %></h3>
+                <small><%= timeAgo(post.createdAt) %></small>
+              </div>
+            </div>
+            <p><%= post.caption %></p>
+            <div class="post-actions">
+              <a
+                style="text-decoration: none; color: inherit"
+                href="/like-post/<%= post._id %>"
+              >
+                <button>
+                  ❤️ Like <span class="like-count"><%= post.likes %></span>
+                </button>
+              </a>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <p>No posts yet...</p>
+          <% } %>
+        </div>
+
+        <div class="profile-info">
+          <h2>About</h2>
+          <p>Joined : <%= joinedDate %></p>
+          <% if (user.about.genres) { %>
+          <p>Favorite Genres: <%= user.about.genres %></p>
+          <% } else { %>
+          <p>Favorite Genres: No favorite genres added yet...</p>
+          <% } %> <% if (user.about.directors) { %>
+          <p>Favorite Directors: <%= user.about.directors %></p>
+          <% } else { %>
+          <p>Favorite Directors: No favorite directors added yet...</p>
+          <% } %>
+          <button
+            class="edit-about"
+            onclick="document.getElementById('editAboutPopup').classList.add('active')"
+          >
+            ✏️ Edit About
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Profile Picture Popup -->
+    <div id="editProfilePicPopup" class="popup-overlay">
+      <div class="popup">
+        <button
+          class="close-popup"
+          onclick="document.getElementById('editProfilePicPopup').classList.remove('active')"
+        >
+          ×
+        </button>
+        <h2>Update Profile Picture</h2>
+        <form
+          action="/edit-profilePic"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <input name="profilePic" type="file" accept="image/*" />
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 1rem"
+          >
+            Upload Picture
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit About Popup -->
+    <div id="editAboutPopup" class="popup-overlay">
+      <div class="popup">
+        <button
+          class="close-popup"
+          onclick="document.getElementById('editAboutPopup').classList.remove('active')"
+        >
+          ×
+        </button>
+        <h2>Edit About</h2>
+        <form action="/edit-about" method="post">
+          <div class="form-group">
+            <label>Favorite Genres</label>
+            <input name="genres" type="text" value="<%= user.about.genres %>" />
+          </div>
+          <div class="form-group">
+            <label>Favorite Directors</label>
+            <input
+              name="directors"
+              type="text"
+              value="<%= user.about.directors %>"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 1rem"
+          >
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit Bio Popup -->
+    <div id="editBioPopup" class="popup-overlay">
+      <div class="popup">
+        <button
+          class="close-popup"
+          onclick="document.getElementById('editBioPopup').classList.remove('active')"
+        >
+          ×
+        </button>
+        <h2>Edit About</h2>
+        <form action="/edit-bio" method="post">
+          <div class="form-group">
+            <label>Bio</label>
+            <input name="bio" type="text" value="<%= user.bio %>" />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 1rem"
+          >
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Create Post Popup -->
+    <div id="createPostPopup" class="popup-overlay">
+      <div class="popup">
+        <button
+          class="close-popup"
+          onclick="document.getElementById('createPostPopup').classList.remove('active')"
+        >
+          ×
+        </button>
+        <h2>Create a Post</h2>
+        <form action="/create-post" method="post">
+          <div class="form-group">
+            <label>Text</label>
+            <textarea
+              name="postText"
+              type="text"
+              placeholder="Write your post"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 1rem"
+          >
+            Post
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

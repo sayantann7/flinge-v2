@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flinge - home</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/home" class="logo">flinge</a>
+      <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/recommendations">Recommendations</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="grid-layout">
+        <main>
+          <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
+          <div class="post" style="width: 145%">
+            <div class="post-header">
+              <% if (post.author.profilePic) { %>
+              <img
+                src="/images/uploads/<%= post.author.profilePic %>"
+                alt="User"
+              />
+              <% } else { %>
+              <img src="/images/default_profile_pic.jpg" alt="User" />
+              <% } %>
+              <div>
+                <% if (post.author.username === user.username) { %>
+                <a
+                  style="text-decoration: none; color: inherit"
+                  href="/profile"
+                >
+                  <h3><%= post.author.fullname %></h3>
+                </a>
+                <% } else { %>
+                <a
+                  style="text-decoration: none; color: inherit"
+                  href="/user-profile/<%= post.author.username %>"
+                >
+                  <h3><%= post.author.fullname %></h3>
+                </a>
+                <% } %>
+                <small><%= timeAgo(post.createdAt) %></small>
+              </div>
+            </div>
+            <p><%= post.caption %></p>
+            <div class="post-actions">
+              <a
+                style="text-decoration: none; color: inherit"
+                href="/like-post/<%= post._id %>"
+              >
+                <button>
+                  ❤️ Like <span class="like-count"><%= post.likes %></span>
+                </button>
+              </a>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <p>No posts yet...</p>
+          <% } %>
+        </main>
+
+        <!-- <aside class="sidebar">
+                <h2>Trending Fan Pages</h2>
+                <div style="margin-top: 1.5rem;">
+                    <a href="pages/fanpage.html" style="text-decoration: none; color: inherit;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <h3 style="color: var(--primary)">Marvel Cinematic Universe</h3>
+                            <small>250k members</small>
+                        </div>
+                    </a>
+                    <a href="pages/fanpage.html" style="text-decoration: none; color: inherit;">
+                        <div>
+                            <h3 style="color: var(--primary)">Star Wars Saga</h3>
+                            <small>180k members</small>
+                        </div>
+                    </a>
+                </div>
+            </aside> -->
+      </div>
+    </div>
+  </body>
+</html>
